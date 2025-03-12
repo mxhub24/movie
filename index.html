@@ -1,54 +1,121 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-<title>Image Upload and Download</title>
+    <title>Movie Quality Selection</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; flex-direction: column; min-height: 100vh; background-color: #f4f4f4; margin: 0; padding: 20px; overflow-y: auto; scroll-behavior: smooth; }
+        .container { max-width: 500px; width: 100%; background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); text-align: center; flex-grow: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+        #img { display: block; width: 100%; max-height: 300px; object-fit: cover; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        h2 { color: #333; margin-bottom: 10px; }
+        .button-container { text-align: center; margin-top: 20px; display: none; }
+        .button { display: inline-block; padding: 12px 25px; margin: 10px; text-decoration: none; color: #fff; background-color: #007bff; border-radius: 5px; transition: background-color 0.3s ease; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); }
+        .button:hover { background-color: #0056b3; }
+        .ad-container { width: 100%; margin: 20px 0; text-align: center; }
+        iframe { border: none; }
+        .scroll-prompt { color: #777; margin-bottom: 15px; font-style: italic; animation: bounce 1.5s infinite ease-in-out; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .timer-container { margin-top: 20px; text-align: center; }
+        #timer { font-size: 2em; color: #007bff; font-weight: bold; }
+        .timer-text { color: #777; margin-top: 5px; }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <p class="scroll-prompt">Scroll down to select quality</p>
+        <img id="img" src="placeholder.jpeg" alt="Movie Poster" loading="lazy">
+        <h2>Select Movie Quality</h2>
 
-<h1>Image Upload and Download</h1>
+        <div class="timer-container">
+            <div id="timer">10</div>
+            <div class="timer-text">Buttons will appear in seconds...</div>
+        </div>
 
-<input type="file" id="imageUpload" accept="image/*" multiple>
+        <div class="button-container">
+            <a id="btn480p" class="button" href="#" target="_blank">480p</a>
+            <a id="btn720p" class="button" href="#" target="_blank">720p</a>
+            <a id="btn1080p" class="button" href="#" target="_blank">1080p</a>
+        </div>
 
-<script>
-  const imageUpload = document.getElementById('imageUpload');
-  let imageCount = 1; // Initialize image counter
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://mxhub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://mxhub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://mxhub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://mxhub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://mxhub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+        <div class="ad-container">
+            <iframe loading="lazy" src="https://mxhub24.github.io/ads/" scrolling="no" width="350px" height="300px"></iframe>
+        </div>
+    </div>
 
-  imageUpload.addEventListener('change', (event) => {
-    const files = event.target.files;
+    <script>
+        function getQueryParam(param) { const urlParams = new URLSearchParams(window.location.search); return urlParams.get(param); }
+        const movie = getQueryParam("movie");
+        if (movie) {
+            document.getElementById("btn480p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_480p`;
+            document.getElementById("btn720p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_720p`;
+            document.getElementById("btn1080p").href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movie)}_1080p`;
+            document.getElementById("img").src = `${movie}.jpeg`;
+            document.getElementById("img").onerror = function() { document.getElementById("img").src = "placeholder.jpeg"; }
+        }
 
-    if (files && files.length > 0) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const reader = new FileReader();
+        let pageLoaded = false;
 
-        reader.onload = (e) => {
-          const base64Image = e.target.result;
-          const newFilename = `${imageCount}.jpg`; // Use counter for filename
-          imageCount++; // Increment for the next image
+        window.addEventListener('load', () => {
+            pageLoaded = true;
+            window.scrollTo(0, document.body.scrollHeight);
+        });
 
-          // Create download link immediately
-          const link = document.createElement('a');
-          link.href = base64Image;
-          link.download = newFilename;
-          link.textContent = `Download ${newFilename}`;
-          document.body.appendChild(link);
-          document.body.appendChild(document.createElement('br')); // Add line break
+        const buttonContainer = document.querySelector('.button-container');
+        const timerContainer = document.querySelector('.timer-container');
+        const timerDisplay = document.getElementById('timer');
 
-        };
+        let timeLeft = 10;
 
-        reader.readAsDataURL(file);
-      }
-    } else {
-      console.log("No files selected.");
-    }
-  });
+        const countdown = setInterval(() => {
+            timerDisplay.textContent = timeLeft;
+            timeLeft--;
 
+            if (timeLeft < 0) {
+                clearInterval(countdown);
+                timerContainer.style.display = 'none';
+                buttonContainer.style.display = 'block';
+                if (!pageLoaded) {
+                    window.scrollTo(0, document.body.scrollHeight);
+                }
+            }
+        }, 1000);
 
-</script>
+        let scrollTimeout;
+        window.addEventListener('wheel', (e) => {
+            clearTimeout(scrollTimeout);
 
+            const scrollAmount = e.deltaY * 0.05;
+            let currentScroll = window.scrollY;
+            let targetScroll = currentScroll + scrollAmount;
+
+            const smoothScroll = () => {
+                currentScroll += (targetScroll - currentScroll) * 0.00001;
+                window.scrollTo(0, currentScroll);
+                if (Math.abs(targetScroll - currentScroll) > 1) {
+                    requestAnimationFrame(smoothScroll);
+                }
+            };
+
+            smoothScroll();
+
+            e.preventDefault();
+        }, { passive: false });
+    </script>
 </body>
-</html>
-
+  </html>
