@@ -3,63 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Quality Selection</title>
+    <title>Movie Download</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            background-color: #222;
+            color: white;
+            margin: 0;
             padding: 20px;
         }
-        h1 {
+        h2 {
             margin-bottom: 20px;
         }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            font-size: 16px;
-            text-decoration: none;
-            color: #fff;
+        .btn {
+            display: block;
+            width: 80%;
+            max-width: 300px;
+            margin: 10px auto;
+            padding: 15px;
+            font-size: 18px;
+            color: white;
             background-color: #007bff;
+            border: none;
             border-radius: 5px;
+            cursor: pointer;
         }
-        .button:hover {
+        .btn:hover {
             background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
-<h1>Select Movie Quality</h1>
-<p id="movie-name"></p>
+    <h2 id="movieTitle">Loading...</h2>
 
-<!-- Buttons for each quality -->
-<a id="480pButton" class="button" href="#">480p</a>
-<a id="720pButton" class="button" href="#">720p</a>
-<a id="1080pButton" class="button" href="#">1080p</a>
+    <button class="btn" id="btn480p">Download 480p</button>
+    <button class="btn" id="btn720p">Download 720p</button>
+    <button class="btn" id="btn1080p">Download 1080p</button>
 
-<script>
-    // Get the 'start' parameter from the Telegram link
-    const urlParams = new URLSearchParams(window.location.search);
-    const startParam = urlParams.get('start');
+    <script>
+        // Extract movie name from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const movieName = urlParams.get("movie") || "Unknown Movie";
 
-    if (startParam) {
-        // Extract the movie name and quality from the 'start' parameter
-        const [movieName, quality] = startParam.split("_");
+        // Update page title
+        document.getElementById("movieTitle").textContent = `Download: ${movieName}`;
 
-        // Display the movie name
-        document.getElementById('movie-name').innerText = `Select the quality for ${decodeURIComponent(movieName)}`;
+        // Telegram WebApp API
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Expand full screen
 
-        // Create the download links for each quality
-        const baseUrl = 'https://t.me/data1storage_bot?start=';
-        document.getElementById('480pButton').href = baseUrl + encodeURIComponent(`${movieName}_480p`);
-        document.getElementById('720pButton').href = baseUrl + encodeURIComponent(`${movieName}_720p`);
-        document.getElementById('1080pButton').href = baseUrl + encodeURIComponent(`${movieName}_1080p`);
-    } else {
-        // If no 'start' parameter is provided, show an error message
-        document.body.innerHTML = '<h1>Invalid Movie Selection</h1><p>Please try again.</p>';
-    }
-</script>
+        // Button event handlers
+        document.getElementById("btn480p").onclick = () => redirectToBot("480p");
+        document.getElementById("btn720p").onclick = () => redirectToBot("720p");
+        document.getElementById("btn1080p").onclick = () => redirectToBot("1080p");
+
+        function redirectToBot(quality) {
+            const botUsername = "data1storage_bot"; // Replace with your bot username
+            const botLink = `https://t.me/${botUsername}?start=${encodeURIComponent(movieName)}_${quality}`;
+            window.location.href = botLink;
+        }
+    </script>
 
 </body>
 </html>
