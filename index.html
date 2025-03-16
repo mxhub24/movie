@@ -14,6 +14,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            position: relative;
         }
         .container {
             max-width: 400px;
@@ -27,14 +28,14 @@
             color: #333;
         }
         .timer-container {
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             border-radius: 50%;
-            border: 10px solid #3498db;
+            border: 15px solid #3498db;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2em;
+            font-size: 3em;
             font-weight: bold;
             color: #3498db;
             margin: 20px auto;
@@ -72,13 +73,40 @@
             display: block;
             margin: 20px auto;
         }
+        #scroll-up {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Changed to gradient */
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
+            z-index: 1000;
+            font-size: 18px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Added shadow */
+        }
+        #scroll-up:hover {
+            transform: translateY(-3px); /* Slightly lift on hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+        #scroll-up.animate {
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
     </style>
 </head>
 <body onload="scrollDown()">
     <div class="container">
-        <h2>ONE STEP MOVIE DOWNLOAD</h2>
+        <h2>Select Quality</h2>
         <img id="movie-image" src="" alt="Movie Image" width="300">
-<script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
+
         <div class="timer-container" id="timer">10</div>
         <a id="btn-480p" class="btn" target="_blank">480p</a>
         <a id="btn-720p" class="btn" target="_blank">720p</a>
@@ -88,6 +116,7 @@
         <iframe id="banner-iframe-2" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
         <iframe id="banner-iframe-3" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
     </div>
+    <div id="scroll-up" onclick="scrollToTop()">Scroll to Top for DOWNLOAD</div>
 
     <script>
         let tg = window.Telegram.WebApp;
@@ -106,10 +135,12 @@
         const timerDisplay = document.getElementById('timer');
         const timerContainer = document.querySelector('.timer-container');
         const buttons = document.querySelectorAll('.btn');
+        const scrollUp = document.getElementById('scroll-up');
 
         function updateTimer() {
             timerDisplay.textContent = timeLeft;
             timeLeft--;
+
             if (timeLeft < 0) {
                 clearInterval(timerInterval);
                 timerContainer.style.display = 'none';
@@ -121,7 +152,32 @@
 
         function scrollDown() {
             window.scrollTo(0, document.body.scrollHeight);
+            scrollUp.style.display = 'block';
+            scrollUp.classList.add('animate'); // Add animation class
         }
+
+        function scrollToTop() {
+    const startY = window.scrollY;
+    const targetY = 0;
+    const duration = 3000; // Adjust duration (milliseconds) to control speed
+
+    let startTime = null;
+
+    function scrollAnimation(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const progress = timestamp - startTime;
+        const percentage = Math.min(progress / duration, 1);
+
+        window.scrollTo(0, startY + (targetY - startY) * percentage);
+
+        if (progress < duration) {
+            window.requestAnimationFrame(scrollAnimation);
+        }
+    }
+
+    window.requestAnimationFrame(scrollAnimation);
+}
+
     </script>
 </body>
 </html>
