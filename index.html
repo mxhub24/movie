@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Quality Selector</title>
+    <title>Countdown Timer with Iframes</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
         body {
@@ -11,6 +11,9 @@
             text-align: center;
             padding: 20px;
             background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
         .container {
             max-width: 400px;
@@ -23,44 +26,102 @@
         h2 {
             color: #333;
         }
-        .btn {
-            display: block;
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            font-size: 16px;
-            color: white;
-            background: #007bff;
-            border: none;
-            border-radius: 5px;
-            text-decoration: none;
+        .timer-container {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 10px solid #3498db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: #3498db;
+            margin: 20px auto;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        .btn:hover {
-            background: #0056b3;
+        .btn {
+            display: none;
+            width: 100%;
+            padding: 18px;
+            margin: 20px auto;
+            font-size: 20px;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        .my-iframe {
+            width: 300px;
+            height: 1100px;
+            border: 1px solid #ddd;
+            margin: 20px auto;
+            display: block;
+            overflow: hidden;
+        }
+        #movie-image {
+            width: 300px;
+            display: block;
+            margin: 20px auto;
         }
     </style>
 </head>
-<body>
+<body onload="scrollDown()">
     <div class="container">
-        <h2>Select Quality</h2>
+        <h2>ONE STEP MOVIE DOWNLOAD</h2>
+        <img id="movie-image" src="" alt="Movie Image" width="300">
+<script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
+        <div class="timer-container" id="timer">10</div>
         <a id="btn-480p" class="btn" target="_blank">480p</a>
         <a id="btn-720p" class="btn" target="_blank">720p</a>
         <a id="btn-1080p" class="btn" target="_blank">1080p</a>
+
+        <iframe id="banner-iframe-1" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
+        <iframe id="banner-iframe-2" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
+        <iframe id="banner-iframe-3" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
     </div>
 
     <script>
-        // Initialize Telegram Mini App
-        // Get movie name from Telegram WebApp Data
-let tg = window.Telegram.WebApp;
-tg.expand();
+        let tg = window.Telegram.WebApp;
+        setTimeout(() => {
+            tg.expand();
+        }, 100);
 
-// Extract movieName from WebApp's initData
-let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
+        let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
+        document.getElementById('movie-image').src = movieName + '.jpeg';
 
-// Update button links
-document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
-document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
-document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
-</script>
+        document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
+        document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
+        document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
+
+        let timeLeft = 10;
+        const timerDisplay = document.getElementById('timer');
+        const timerContainer = document.querySelector('.timer-container');
+        const buttons = document.querySelectorAll('.btn');
+
+        function updateTimer() {
+            timerDisplay.textContent = timeLeft;
+            timeLeft--;
+            if (timeLeft < 0) {
+                clearInterval(timerInterval);
+                timerContainer.style.display = 'none';
+                buttons.forEach(button => button.style.display = 'block');
+            }
+        }
+        updateTimer();
+        const timerInterval = setInterval(updateTimer, 1000);
+
+        function scrollDown() {
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    </script>
 </body>
 </html>
