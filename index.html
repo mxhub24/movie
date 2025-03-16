@@ -50,17 +50,17 @@
 
     <script>
         // Initialize Telegram Mini App
-        let tg = window.Telegram.WebApp;
-        tg.expand();
+        // Get movie name from Telegram WebApp Data
+let tg = window.Telegram.WebApp;
+tg.expand();
 
-        // Get movie name from startapp parameter
-        const urlParams = new URLSearchParams(window.location.search);
-        let movieName = urlParams.get('startapp') || 'unknown_movie';
+// Extract movieName from WebApp's initData
+let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
 
-        // Update button links
-        document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
-        document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
-        document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
-    </script>
+// Update button links
+document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
+document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
+document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
+</script>
 </body>
 </html>
