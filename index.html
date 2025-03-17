@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer with Iframes</title>
+    <title>Select Quality</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-   
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,7 +19,7 @@
         }
         .container {
             max-width: 400px;
-            margin: auto;
+            margin: 20px auto;
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -28,23 +28,7 @@
         h2 {
             color: #333;
         }
-        .timer-container {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 15px solid #3498db;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3em;
-            font-weight: bold;
-            color: #3498db;
-            margin: 20px auto;
-            position: relative;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
         .btn {
-            display: none;
             width: 100%;
             padding: 18px;
             margin: 20px auto;
@@ -61,39 +45,30 @@
             position: relative;
             overflow: hidden;
         }
-        .my-iframe {
-            width: 300px;
-            height: 1100px;
-            border: 1px solid #ddd;
-            margin: 20px auto;
-            display: block;
-            overflow: hidden;
-        }
         #movie-image {
             width: 300px;
             display: block;
             margin: 20px auto;
         }
-        #scroll-up {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, #6a11cb, #2575fc); /* Changed to gradient */
+        #scroll-down {
+            background: linear-gradient(135deg, #2575fc, #6a11cb);
             color: white;
             padding: 15px 20px;
             border-radius: 5px;
             cursor: pointer;
-            display: none;
+            display: block;
             transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
             z-index: 1000;
             font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Added shadow */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            margin: 20px auto; /* Center and add space */
+            width: fit-content; /* Adjust width to content */
         }
-        #scroll-up:hover {
-            transform: translateY(-3px); /* Slightly lift on hover */
+        #scroll-down:hover {
+            transform: translateY(-3px);
             box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
         }
-        #scroll-up.animate {
+        #scroll-down.animate {
             animation: pulse 1.5s infinite ease-in-out;
         }
         @keyframes pulse {
@@ -101,23 +76,42 @@
             50% { transform: scale(1.05); }
             100% { transform: scale(1); }
         }
+        #banner-container {
+            width: 320px;
+            height: 50px;
+            margin: 10px auto;
+            border-radius: 5px;
+            overflow: hidden;
+        }
     </style>
 </head>
-<body onload="scrollDown()">
+<body>
+    <div id="banner-container">
+        <script type="text/javascript">
+            atOptions = {
+                'key': 'a596e3d2b4c5bde3a6c954344fe9a15d',
+                'format': 'iframe',
+                'height': 50,
+                'width': 320,
+                'params': {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/a596e3d2b4c5bde3a6c954344fe9a15d/invoke.js"></script>
+    </div>
+
+    <div id="scroll-down" onclick="scrollDown()">Scroll Down for DOWNLOAD</div>
+
     <div class="container">
+        <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
         <h2>Select Quality</h2>
         <img id="movie-image" src="" alt="Movie Image" width="300">
-
-        <div class="timer-container" id="timer">10</div>
+        <script type='text/javascript' src='//pl25101894.effectiveratecpm.com/51/d9/02/51d902911e190705390ac91296b3e2f9.js'></script>
+        <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+        <div id="container-f8b0fc5d2d15f9c7db79f34458dee766"></div>
         <a id="btn-480p" class="btn" target="_blank">480p</a>
         <a id="btn-720p" class="btn" target="_blank">720p</a>
         <a id="btn-1080p" class="btn" target="_blank">1080p</a>
-
-        <iframe id="banner-iframe-1" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
-        <iframe id="banner-iframe-2" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
-        <iframe id="banner-iframe-3" class="my-iframe" src="banner.html" frameborder="0" scrolling="no"></iframe>
     </div>
-    <div id="scroll-up" onclick="scrollToTop()">Scroll to Top for DOWNLOAD</div>
 
     <script>
         let tg = window.Telegram.WebApp;
@@ -132,53 +126,10 @@
         document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
         document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
 
-        let timeLeft = 10;
-        const timerDisplay = document.getElementById('timer');
-        const timerContainer = document.querySelector('.timer-container');
-        const buttons = document.querySelectorAll('.btn');
-        const scrollUp = document.getElementById('scroll-up');
+        const scrollDownButton = document.getElementById('scroll-down');
+        scrollDownButton.classList.add('animate');
 
-        function updateTimer() {
-            timerDisplay.textContent = timeLeft;
-            timeLeft--;
-
-            if (timeLeft < 0) {
-                clearInterval(timerInterval);
-                timerContainer.style.display = 'none';
-                buttons.forEach(button => button.style.display = 'block');
-            }
-        }
-        updateTimer();
-        const timerInterval = setInterval(updateTimer, 1000);
-
-        function scrollDown() {
-            window.scrollTo(0, document.body.scrollHeight);
-            scrollUp.style.display = 'block';
-            scrollUp.classList.add('animate'); // Add animation class
-        }
-
-        function scrollToTop() {
-    const startY = window.scrollY;
-    const targetY = 0;
-    const duration = 3000; // Adjust duration (milliseconds) to control speed
-
-    let startTime = null;
-
-    function scrollAnimation(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const progress = timestamp - startTime;
-        const percentage = Math.min(progress / duration, 1);
-
-        window.scrollTo(0, startY + (targetY - startY) * percentage);
-
-        if (progress < duration) {
-            window.requestAnimationFrame(scrollAnimation);
-        }
-    }
-
-    window.requestAnimationFrame(scrollAnimation);
-}
-
+        
     </script>
 </body>
 </html>
