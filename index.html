@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width:device-width, initial-scale=1.0">
     <title>Select Quality</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 20px;
-            background-color: #f4f4f4;
-            display: flex;
-            flex-direction: column;
+            padding: 0;
+            margin: 0;
+            background-color: rgba(0, 0, 0, 0.5);
             min-height: 100vh;
-            position: relative;
+        }
+        .scrollable-content {
+            overflow-y: auto;
+            max-height: 100vh;
+            width: 100%;
         }
         .container {
             max-width: 400px;
@@ -29,107 +31,100 @@
             color: #333;
         }
         .btn {
-            width: 100%;
-            padding: 18px;
-            margin: 20px auto;
-            font-size: 20px;
+            width: 90%;
+            padding: 15px;
+            margin: 10px auto;
+            font-size: 18px;
             font-weight: 600;
             color: white;
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             border: none;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
             text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
+            display: block;
         }
         #movie-image {
-            width: 300px;
+            width: 250px;
             display: block;
-            margin: 20px auto;
-        }
-        #scroll-down {
-            background: linear-gradient(135deg, #2575fc, #6a11cb);
-            color: white;
-            padding: 15px 20px;
+            margin: 15px auto;
             border-radius: 5px;
-            cursor: pointer;
-            display: block;
-            transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
-            z-index: 1000;
-            font-size: 18px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            margin: 20px auto; /* Center and add space */
-            width: fit-content; /* Adjust width to content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        #scroll-down:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        #native-banner-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10000;
+            text-align: center;
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        #scroll-down.animate {
-            animation: pulse 1.5s infinite ease-in-out;
+        #container-f8b0fc5d2d15f9c7db79f34458dee766{
+            width: 60%;
+            height: 100%;
         }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        #banner-container {
-            width: 320px;
-            height: 50px;
-            margin: 10px auto;
-            border-radius: 5px;
-            overflow: hidden;
-        }
+
     </style>
 </head>
 <body>
-    <div id="banner-container">
-        <script type="text/javascript">
-            atOptions = {
-                'key': 'a596e3d2b4c5bde3a6c954344fe9a15d',
-                'format': 'iframe',
-                'height': 50,
-                'width': 320,
-                'params': {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/a596e3d2b4c5bde3a6c954344fe9a15d/invoke.js"></script>
-    </div>
-
-    <div id="scroll-down" onclick="scrollDown()">Scroll Down for DOWNLOAD</div>
-
-    <div class="container">
-        <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
-        <h2>Select Quality</h2>
-        <img id="movie-image" src="" alt="Movie Image" width="300">
-        <script type='text/javascript' src='//pl25101894.effectiveratecpm.com/51/d9/02/51d902911e190705390ac91296b3e2f9.js'></script>
+    <div id="native-banner-container">
         <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
         <div id="container-f8b0fc5d2d15f9c7db79f34458dee766"></div>
-        <a id="btn-480p" class="btn" target="_blank">480p</a>
-        <a id="btn-720p" class="btn" target="_blank">720p</a>
-        <a id="btn-1080p" class="btn" target="_blank">1080p</a>
+    </div>
+
+    <div class="scrollable-content">
+        <div class="container">
+             <h2>Select Quality</h2>
+            <img id="movie-image" src="" alt="Movie Image" width="250">
+            <a id="btn-480p" class="btn" target="_blank">480p</a>
+            <a id="btn-720p" class="btn" target="_blank">720p</a>
+            <a id="btn-1080p" class="btn" target="_blank">1080p</a>
+        </div>
     </div>
 
     <script>
-        let tg = window.Telegram.WebApp;
-        setTimeout(() => {
-            tg.expand();
-        }, 100);
+    let tg = window.Telegram.WebApp;
+    setTimeout(() => {
+        tg.expand();
+    }, 100);
 
-        let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
-        document.getElementById('movie-image').src = movieName + '.jpeg';
+    let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
+    document.getElementById('movie-image').src = movieName + '.jpeg';
 
-        document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
-        document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
-        document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
+    document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
+    document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
+    document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
 
-        const scrollDownButton = document.getElementById('scroll-down');
-        scrollDownButton.classList.add('animate');
+    const bannerContainer = document.getElementById('container-f8b0fc5d2d15f9c7db79f34458dee766');
+    const body = document.body;
+    const mainContainer = document.querySelector('.container');
+    const nativeBannerContainer = document.getElementById('native-banner-container');
+    const scrollableContent = document.querySelector('.scrollable-content');
 
-        
-    </script>
+    function addClickListener() {
+        if (bannerContainer && bannerContainer.children.length > 0) {
+            nativeBannerContainer.addEventListener('click', () => {
+                nativeBannerContainer.style.opacity = '0';
+                nativeBannerContainer.style.pointerEvents = 'none';
+                setTimeout(() => {
+                    nativeBannerContainer.style.pointerEvents = 'auto';
+                    nativeBannerContainer.style.opacity = '0'; // keep opacity 0
+                }, 10000);
+            });
+        } else {
+            setTimeout(addClickListener, 100);
+        }
+    }
+    addClickListener();
+</script>
+
 </body>
 </html>
