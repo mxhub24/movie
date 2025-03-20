@@ -11,7 +11,7 @@
             text-align: center;
             padding: 0;
             margin: 0;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0);
             min-height: 100vh;
         }
         .scrollable-content {
@@ -31,7 +31,7 @@
             color: #333;
         }
         .btn {
-            width: 90%;
+            width: 65%;
             padding: 15px;
             margin: 10px auto;
             font-size: 18px;
@@ -46,7 +46,7 @@
             display: block;
         }
         #movie-image {
-            width: 250px;
+            width: 70%;
             display: block;
             margin: 15px auto;
             border-radius: 5px;
@@ -55,21 +55,42 @@
         #native-banner-container {
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100%;
+            left: 15%;
+            width: 70%;
             height: 100%;
             z-index: 10000;
             text-align: center;
-            background-color: white;
             display: flex;
             justify-content: center;
             align-items: center;
-            opacity: 0;
+            opacity: 1;
             transition: opacity 0.3s ease;
+            background: transparent;
         }
         #container-f8b0fc5d2d15f9c7db79f34458dee766{
             width: 100%;
-            height: 100%;
+        }
+        #close-banner {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 36px;
+            color: white;
+            z-index: 10001;
+            pointer-events: none;
+            background-color: grey;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pulseCross 1.5s ease-in-out infinite; /* Added pulse animation */
+        }
+        @keyframes pulseCross { /* Added keyframes for pulse animation */
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); } /* Slightly bigger */
+            100% { transform: scale(1); }
         }
 
     </style>
@@ -79,12 +100,13 @@
     <div id="native-banner-container">
         <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
         <div id="container-f8b0fc5d2d15f9c7db79f34458dee766"></div>
+        <span id="close-banner">&times;</span>
     </div>
 
     <div class="scrollable-content">
         <div class="container">
              <h2>Select Quality</h2>
-            <img id="movie-image" src="" alt="Movie Image" width="250">
+            <img id="movie-image" src="" alt="Movie Image" width="70%">
             <a id="btn-480p" class="btn" target="_blank">480p</a>
             <a id="btn-720p" class="btn" target="_blank">720p</a>
             <a id="btn-1080p" class="btn" target="_blank">1080p</a>
@@ -107,12 +129,14 @@
     const bannerContainer = document.getElementById('container-f8b0fc5d2d15f9c7db79f34458dee766');
     const nativeBannerContainer = document.getElementById('native-banner-container');
 
+    function hideBanner() {
+        nativeBannerContainer.style.opacity = '0';
+        nativeBannerContainer.style.pointerEvents = 'none';
+    }
+
     function addClickListener() {
         if (bannerContainer && bannerContainer.children.length > 0) {
-            nativeBannerContainer.addEventListener('click', () => {
-                nativeBannerContainer.style.opacity = '0';
-                nativeBannerContainer.style.pointerEvents = 'none';
-            });
+            nativeBannerContainer.addEventListener('click', hideBanner);
         } else {
             setTimeout(addClickListener, 100);
         }
@@ -120,7 +144,7 @@
     addClickListener();
 
     function showBannerAgain() {
-        nativeBannerContainer.style.opacity = '0';
+        nativeBannerContainer.style.opacity = '1';
         nativeBannerContainer.style.pointerEvents = 'auto';
     }
 
