@@ -13,6 +13,7 @@
             margin: 0;
             background-color: rgba(0, 0, 0, 0);
             min-height: 100vh;
+            position: relative; /* Make body a positioned container */
         }
         .scrollable-content {
             overflow-y: auto;
@@ -52,15 +53,23 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        /* Style for the social bar ad */
+        #close-ad {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 30px;
+            color: black;
+            cursor: default;
+            z-index: 1001;
+            padding: 5px;
+        }
         #social-bar-ad {
             position: fixed;
             bottom: 0;
             left: 0;
             width: 100%;
             text-align: center;
-            z-index: 1000;
-            opacity: 0; /* Changed opacity to 0 */
+            z-index: 999; /* Lower z-index than close-ad */
         }
     </style>
 </head>
@@ -74,7 +83,7 @@
             <a id="btn-1080p" class="btn" target="_blank">1080p</a>
         </div>
     </div>
-
+    <span id="close-ad">&times;</span>
     <div id="social-bar-ad">
         <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
     </div>
