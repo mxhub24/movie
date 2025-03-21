@@ -59,11 +59,19 @@
             text-align: center;
             position: sticky; /* Make header sticky */
             top: 0;
-            z-index: 1000; /* Ensure header is above other content */
+            z-index: 1001; /* Ensure header is above other content */
         }
         header h1 {
             margin: 0;
             font-size: 24px;
+        }
+        #social-bar-ad {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 1000; /* Lower z-index than header */
         }
     </style>
 </head>
@@ -81,7 +89,9 @@
             <a id="btn-1080p" class="btn" target="_blank">1080p</a>
         </div>
     </div>
-    <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
+    <div id="social-bar-ad">
+        <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
+    </div>
 
     <script>
         let tg = window.Telegram.WebApp;
