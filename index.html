@@ -53,20 +53,25 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        #close-ad {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 30px;
-            color: black;
-            cursor: default;
-            z-index: 1001;
-            padding: 5px;
+        header {
+            background-color: #f0f0f0; /* Light gray background */
+            padding: 10px 0;
+            text-align: center;
+            position: sticky; /* Make header sticky */
+            top: 0;
+            z-index: 1000; /* Ensure header is above other content */
         }
-
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <h1>Movie Download</h1>
+    </header>
+
     <div class="scrollable-content">
         <div class="container">
             <img id="movie-image" src="" alt="Movie Image" width="70%">
@@ -76,10 +81,8 @@
             <a id="btn-1080p" class="btn" target="_blank">1080p</a>
         </div>
     </div>
-    <span id="close-ad">&times;</span>
+    <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
 
-<script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
-  
     <script>
         let tg = window.Telegram.WebApp;
         setTimeout(() => {
