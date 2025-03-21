@@ -65,18 +65,38 @@
     position: fixed; /* Fixed position to keep it on top */
     top: 0;
     left: 0;
+       
     width: 100%;
     z-index: 9999; /* Ensure it is above all other elements */
 }
 
 #social-bar-ad {
     position: fixed;
-    bottom: 0;
+    
     left: 0;
+    height:70%;
+    width: 100%;
+    text-align: center;
+    z-index: 1000; /* Lower than the header */
+}container {
+    position: fixed;
+    overflow:hidden;
+    left: 0;
+    height:50%;
     width: 100%;
     text-align: center;
     z-index: 1000; /* Lower than the header */
 }
+    .hidden-close {
+    position: fixed;
+    bottom: 50px; /* Adjust based on the ad's close button position */
+    right: 10px; /* Adjust based on the close button position */
+    width: 40px; /* Approximate close button size */
+    height: 40px; /* Approximate close button size */
+    background: rgba(255, 255, 255, 50); /* Fully transparent */
+    z-index: 1002; /* Higher than the ad to cover the close button */
+}
+
 
     </style>
 </head>
@@ -94,8 +114,11 @@
             <a id="btn-1080p" class="btn" target="_blank">1080p</a>
         </div>
     </div>
+    <div class="hidden-close">i</div>
+<div id="container">
     <div id="social-bar-ad">
         <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
+    </div>
     </div>
 
     <script>
