@@ -2,10 +2,29 @@
 <html>
 <head>
   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=0.75"> 
-    <title>My Website</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script>
+    window.Telegram.WebApp.ready(); // Signal that the Mini App is ready
+  </script>
+  <title>My Mini App</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background-color: var(--tg-theme-bg-color); /* Use Telegram theme variables */
+      color: var(--tg-theme-text-color);
+    }
+    /* Add any custom styles here */
+    #container-f8b0fc5d2d15f9c7db79f34458dee766{
+      width: 100%; /* Ensure full width in Telegram */
+      box-sizing: border-box; /* Include padding and border in element's total width and height */
+    }
+
+  </style>
 </head>
 <body>
-  <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
+<div id="container-f8b0fc5d2d15f9c7db79f34458dee766"></div>
+ <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
 </body>
 </html>
