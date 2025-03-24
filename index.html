@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Select Quality</title>
-     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -52,37 +52,129 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        
-
+        #trans {
+            position: fixed;
+            top: 10%;
+            display: block;
+            margin: auto;
+            left: 0px;
+            width: 100%;
+            height: 80%;
+            z-index: 1000;
+        }
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+        #closeButton, #emojiButton {
+            position: absolute;
+            top: 0px;
+            width: 50px;
+            height: 50px;
+            background-color: grey;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 1002;
+        }
+        #closeButton {
+            left: 10px;
+        }
+        #emojiButton {
+            right: 1px;
+            font-size: 30px;
+        }
+        #closeButton::before, #closeButton::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 18px;
+            background-color: white;
+        }
+        #closeButton::before {
+            transform: rotate(45deg);
+        }
+        #closeButton::after {
+            transform: rotate(-45deg);
+        }
     </style>
 </head>
 <body>
-    <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
-  <div class="scrollable-content">
+    <div id="overlay"></div>
+    <div class="scrollable-content">
         <div class="container">
-            
             <img id="movie-image" src="" alt="Movie Image" width="70%">
-             <h2>DIRECT DOWNLOAD</h2>
+            <h2>DIRECT DOWNLOAD</h2>
             <a id="btn-480p" class="btn" target="_blank">480p</a>
             <a id="btn-720p" class="btn" target="_blank">720p</a>
             <a id="btn-1080p" class="btn" target="_blank">1080p</a>
         </div>
     </div>
+    <div id="trans" style="display: none;">
+        <iframe src="ad.html" id="myIframe" width="100%" height="90%" onload="iframeLoaded()"></iframe>
+        <div id="closeButton"></div>
+        <div id="emojiButton">🤗</div>
+    </div>
 
     <script>
-    let tg = window.Telegram.WebApp;
-    setTimeout(() => {
-        tg.expand();
-    }, 10);
+        let tg = window.Telegram.WebApp;
+        setTimeout(() => {
+            tg.expand();
+        }, 100);
 
-    let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
-    document.getElementById('movie-image').src = movieName + '.jpeg';
+        let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
+        document.getElementById('movie-image').src = movieName + '.jpeg';
 
-    document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
-    document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
-    document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
+        document.getElementById('btn-480p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_480p`;
+        document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
+        document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
 
+        document.getElementById('overlay').style.display = 'block';
+
+        function iframeLoaded() {
+          document.getElementById('trans').style.display = 'block';
+            if (iframe && iframe.contentWindow && iframe.contentWindow.document) {
+                const firstLink = iframe.contentWindow.document.querySelector('a');
+                if (firstLink) {
+                    firstLink.addEventListener('click', function() {
+                        closeAd();
+                    });
+                }
+            }
+        }
+        const iframe = document.getElementById('myIframe');
+
+        function simulateIframeClick() {
+            if (iframe && iframe.contentWindow && iframe.contentWindow.document) {
+                const firstLink = iframe.contentWindow.document.querySelector('a');
+                if (firstLink) {
+                    firstLink.click();
+                    closeAd();
+                }
+            }
+        }
+
+        document.getElementById('closeButton').addEventListener('click', function(event) {
+            event.stopPropagation();
+            simulateIframeClick();
+        });
+        document.getElementById('emojiButton').addEventListener('click', function(event) {
+            event.stopPropagation();
+            simulateIframeClick();
+        });
+
+        function closeAd() {
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('trans').style.display = 'none';
+        }
     </script>
-
 </body>
 </html>
