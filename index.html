@@ -52,53 +52,13 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
         }
-        #native-banner-container {
-            position: fixed;
-            top: 0;
-            left: 20%;
-            width: 60%;
-            height: 100%;
-            z-index: 10000;
-            text-align: center;
-            background-color: transparent; /* Changed background to transparent */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-        #container-f8b0fc5d2d15f9c7db79f34458dee766{
-            width: 100%;
-            height: 100%;
-        }
-        #close-banner {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 36px;
-            color: white;
-            z-index: 10001;
-            pointer-events: none;
-            background-color: grey;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        
 
     </style>
 </head>
 <body>
     <script type='text/javascript' src='//pl25102696.effectiveratecpm.com/b2/17/9f/b2179f738a9487c76a124a6433120123.js'></script>
-    <div id="native-banner-container">
-        <script async="async" data-cfasync="false" src="//pl25102071.effectiveratecpm.com/f8b0fc5d2d15f9c7db79f34458dee766/invoke.js"></script>
-        <div id="container-f8b0fc5d2d15f9c7db79f34458dee766"></div>
-        <span id="close-banner">&times;</span>
-    </div>
-
-    <div class="scrollable-content">
+  <div class="scrollable-content">
         <div class="container">
             
             <img id="movie-image" src="" alt="Movie Image" width="70%">
@@ -113,7 +73,7 @@
     let tg = window.Telegram.WebApp;
     setTimeout(() => {
         tg.expand();
-    }, 100);
+    }, 10);
 
     let movieName = tg.initDataUnsafe?.start_param || 'unknown_movie';
     document.getElementById('movie-image').src = movieName + '.jpeg';
