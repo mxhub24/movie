@@ -82,32 +82,7 @@
     document.getElementById('btn-720p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_720p`;
     document.getElementById('btn-1080p').href = `https://t.me/data1storage_bot?start=${encodeURIComponent(movieName)}_1080p`;
 
-    const bannerContainer = document.getElementById('container-f8b0fc5d2d15f9c7db79f34458dee766');
-    const nativeBannerContainer = document.getElementById('native-banner-container');
-
-    function hideBanner() {
-        nativeBannerContainer.style.opacity = '0';
-        nativeBannerContainer.style.pointerEvents = 'none';
-    }
-
-    function addClickListener() {
-        if (bannerContainer && bannerContainer.children.length > 0) {
-            nativeBannerContainer.addEventListener('click', hideBanner);
-        } else {
-            setTimeout(addClickListener, 100);
-        }
-    }
-    addClickListener();
-
-    function showBannerAgain() {
-        nativeBannerContainer.style.opacity = '1';
-        nativeBannerContainer.style.pointerEvents = 'auto';
-    }
-
-    document.getElementById('btn-480p').addEventListener('click', showBannerAgain);
-    document.getElementById('btn-720p').addEventListener('click', showBannerAgain);
-    document.getElementById('btn-1080p').addEventListener('click', showBannerAgain);
-</script>
+    </script>
 
 </body>
 </html>
