@@ -82,12 +82,11 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
             z-index: 1002;
+            pointer-events: none; /* Make clicks pass through */
         }
         #closeButton {
             position:fixed;
-            z-index: 999;
             top:10%;
             left: 10px;
         }
@@ -151,34 +150,11 @@
             });
         }
 
-        const iframe = document.getElementById('myIframe');
-
-        function simulateIframeClick() {
-            if (iframe && iframe.contentWindow && iframe.contentWindow.document) {
-                const firstLink = iframe.contentWindow.document.querySelector('a');
-                if (firstLink) {
-                    firstLink.click();
-                    closeAd();
-                }
-            }
-        }
-                document.getElementById('emojiButton').addEventListener('click', function(event) {
-            event.stopPropagation();
-            simulateIframeClick();
-        });
-
-        document.getElementById('closeButton').addEventListener('click', function(event) {
-            event.stopPropagation();
-            simulateIframeClick();
-        });
-        
-
         function closeAd() {
             document.getElementById('overlay').style.display = 'none';
-         document.getElementById('closeButton').style.display = 'none';
-          document.getElementById('trans').style.display = 'none';
+            document.getElementById('closeButton').style.display = 'none';
+            document.getElementById('trans').style.display = 'none';
         }
     </script>
 </body>
-    </html>
-    
+</html>
