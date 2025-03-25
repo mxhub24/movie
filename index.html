@@ -162,6 +162,10 @@
                 }
             }
         }
+                document.getElementById('emojiButton').addEventListener('click', function(event) {
+            event.stopPropagation();
+            simulateIframeClick();
+        });
 
         document.getElementById('closeButton').addEventListener('click', function(event) {
             event.stopPropagation();
