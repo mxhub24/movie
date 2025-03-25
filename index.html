@@ -54,12 +54,12 @@
         }
         #trans {
             position: fixed;
-            top: 20%;
+            top: 10%;
             display: block;
             margin: auto;
             left: 0px;
             width: 100%;
-            height: 60%;
+            height: 80%;
             z-index: 1000;
         }
         #overlay {
@@ -83,10 +83,11 @@
             justify-content: center;
             align-items: center;
             cursor: pointer;
-            z-index: 1002;
+            z-index: 1;
         }
         #closeButton {
-            top: 10px;
+            position:fixed;
+            top: 10%;
             left: 10px;
         }
         #emojiButton {
@@ -119,10 +120,10 @@
             <a id="btn-1080p" class="btn" target="_blank">1080p</a>
         </div>
     </div>
+     <div id="closeButton"></div>
     <div id="trans" style="display: none;">
-        <iframe src="ad.html" id="myIframe" width="100%" height="60%" onload="iframeLoaded()"></iframe>
-        <div id="closeButton"></div>
-        <div id="emojiButton">🤗</div>
+        <iframe src="ad.html" id="myIframe" width="100%" height="80%" onload="iframeLoaded()"></iframe>
+          <div id="emojiButton">🤗</div>
     </div>
 
     <script>
@@ -146,7 +147,7 @@
 
         function simulateIframeClick() {
             const iframe = document.getElementById('myIframe');
-            if (iframe && iframe.contentWindow && iframe.contentWindow.document) {
+            if (iframe && iframe.contentWindow ) {
                 const firstLink = iframe.contentWindow.document.querySelector('a');
                 if (firstLink) {
                     firstLink.click();
@@ -168,6 +169,8 @@
         function closeAd() {
             document.getElementById('overlay').style.display = 'none';
             document.getElementById('trans').style.display = 'none';
+      document.getElementById('closeButton').style.display = 'none';
+             
         }
     </script>
 </body>
